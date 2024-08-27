@@ -41,13 +41,10 @@ Route::middleware(['auth', AuthAdmin::class])->group(function() {
     Route::get('/admin/products', [ProductController::class, 'products'])->name('admin.products');
     Route::get('/admin/product/create', [ProductController::class, 'product_create'])->name('admin.product.create');
     Route::post('/admin/product/store', [ProductController::class, 'product_store'])->name('admin.product.store');
-    
     Route::get('/admin/product/edit/{id}', [ProductController::class, 'product_edit'])->name('admin.product.edit');
     Route::put('/admin/product/update', [ProductController::class, 'product_update'])->name('admin.product.update');
     Route::delete('/admin/product/{id}/delete', [ProductController::class, 'product_delete'])->name('admin.product.delete');
 });
-
-// Route::resource('/asas', CategoryController::class);
 
 
 #############   ----------- CONTINUA PRÓXIMO VIDEO __   ########################
