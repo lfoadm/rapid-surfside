@@ -305,19 +305,19 @@
         <div class="overflow-hidden">
           <ul class="navigation__list list-unstyled position-relative">
             <li class="navigation__item">
-              <a href="{{ route('home.index') }}" class="navigation__link">Home</a>
+              <a href="{{ route('home.index') }}" class="navigation__link">Início</a>
             </li>
             <li class="navigation__item">
-              <a href="shop.html" class="navigation__link">Shop</a>
+              <a href="{{ route('shop.index') }}" class="navigation__link">Comprar</a>
             </li>
             <li class="navigation__item">
-              <a href="cart.html" class="navigation__link">Cart</a>
+              <a href="{{ route('cart.index') }}" class="navigation__link">Carrinho</a>
             </li>
             <li class="navigation__item">
-              <a href="about.html" class="navigation__link">About</a>
+              <a href="about.html" class="navigation__link">Sobre</a>
             </li>
             <li class="navigation__item">
-              <a href="contact.html" class="navigation__link">Contact</a>
+              <a href="contact.html" class="navigation__link">Contato</a>
             </li>
           </ul>
         </div>
@@ -386,19 +386,19 @@
         <nav class="navigation">
           <ul class="navigation__list list-unstyled d-flex">
             <li class="navigation__item">
-              <a href="{{ route('home.index') }}" class="navigation__link">Home</a>
+              <a href="{{ route('home.index') }}" class="navigation__link">Início</a>
             </li>
             <li class="navigation__item">
-              <a href="shop.html" class="navigation__link">Shop</a>
+              <a href="{{ route('shop.index') }}" class="navigation__link">Comprar</a>
             </li>
             <li class="navigation__item">
-              <a href="cart.html" class="navigation__link">Cart</a>
+              <a href="{{ route('cart.index') }}" class="navigation__link">Carrinho</a>
             </li>
             <li class="navigation__item">
-              <a href="about.html" class="navigation__link">About</a>
+              <a href="about.html" class="navigation__link">Sobre</a>
             </li>
             <li class="navigation__item">
-              <a href="contact.html" class="navigation__link">Contact</a>
+              <a href="contact.html" class="navigation__link">Contato</a>
             </li>
           </ul>
         </nav>
@@ -473,12 +473,13 @@
             </svg>
           </a>
 
-          <a href="cart.html" class="header-tools__item header-tools__cart">
-            <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-   xmlns="http://www.w3.org/2000/svg">
+          <a href="{{ route('cart.index') }}" class="header-tools__item header-tools__cart">
+            <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <use href="#icon_cart" />
             </svg>
-            <span class="cart-amount d-block position-absolute js-cart-items-count">3</span>
+            @if (Cart::instance('cart')->content()->count()>0)
+              <span class="cart-amount d-block position-absolute js-cart-items-count">{{ Cart::instance('cart')->content()->count() }}</span>
+            @endif
           </a>
         </div>
       </div>
@@ -497,9 +498,9 @@
               <img src="{{ asset('assets/images/logo.png') }}" alt="SurfsideMedia" class="logo__image d-block" />
             </a>
           </div>
-          <p class="footer-address">123 Beach Avenue, Surfside City, CA 00000</p>
-          <p class="m-0"><strong class="fw-medium">contact@surfsidemedia.in</strong></p>
-          <p><strong class="fw-medium">+1 000-000-0000</strong></p>
+          <p class="footer-address">Rua Edna Ferreira, 117 | B. Floresta | Iturama/MG</p>
+          <p class="m-0"><strong class="fw-medium">contato@pixfun.com.br</strong></p>
+          <p><strong class="fw-medium">(34) 99974-9344</strong></p>
 
           <ul class="social-links list-unstyled d-flex flex-wrap mb-0">
             <li>
@@ -542,48 +543,48 @@
         </div>
 
         <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Company</h6>
+          <h6 class="sub-menu__title text-uppercase">Compania</h6>
           <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">About Us</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Careers</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Affiliates</a></li>
+            <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">Quem somos</a></li>
+            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Carreiras</a></li>
+            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Afiliados</a></li>
             <li class="sub-menu__item"><a href="blog_list1.html" class="menu-link menu-link_us-s">Blog</a></li>
-            <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contact Us</a></li>
+            <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contato</a></li>
           </ul>
         </div>
 
         <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Shop</h6>
+          <h6 class="sub-menu__title text-uppercase">Comprar</h6>
           <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New Arrivals</a></li>
-            <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessories</a></li>
-            <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Men</a></li>
-            <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Women</a></li>
-            <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Shop All</a></li>
+            <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">Novidades</a></li>
+            <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessórios</a></li>
+            <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Homem</a></li>
+            <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Mulher</a></li>
+            <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Comprar tudo</a></li>
           </ul>
         </div>
 
         <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Help</h6>
+          <h6 class="sub-menu__title text-uppercase">Ajuda</h6>
           <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer Service</a></li>
-            <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">My Account</a>
+            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Serviços ao cliente</a></li>
+            <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">Minha conta</a>
             </li>
-            <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a Store</a>
+            <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Encontre uma loja</a>
             </li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Legal & Privacy</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Gift Card</a></li>
+            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Privacidade</a></li>
+            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Cartão de presente</a></li>
           </ul>
         </div>
 
         <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Categories</h6>
+          <h6 class="sub-menu__title text-uppercase">Categorias</h6>
           <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shirts</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Jeans</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shoes</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Bags</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shop All</a></li>
+            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Camisetas</a></li>
+            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Calças jeans</a></li>
+            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Sapatos</a></li>
+            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Bolsas</a></li>
+            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Comprar tudo</a></li>
           </ul>
         </div>
       </div>
@@ -591,10 +592,10 @@
 
     <div class="footer-bottom">
       <div class="container d-md-flex align-items-center">
-        <span class="footer-copyright me-auto">©2024 Surfside Media</span>
+        <span class="footer-copyright me-auto">©2024 Pixfun</span>
         <div class="footer-settings d-md-flex align-items-center">
-          <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms &amp;
-            Conditions</a>
+          <a href="privacy-policy.html">Política de privacidade</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Termos &amp;
+            Condições</a>
         </div>
       </div>
     </div>
@@ -607,7 +608,7 @@
           <svg class="d-block" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <use href="#icon_home" />
           </svg>
-          <span>Home</span>
+          <span>Início</span>
         </a>
       </div>
 
@@ -616,7 +617,7 @@
           <svg class="d-block" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <use href="#icon_hanger" />
           </svg>
-          <span>Shop</span>
+          <span>Comprar</span>
         </a>
       </div>
 
