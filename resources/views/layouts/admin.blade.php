@@ -385,9 +385,6 @@
                                     </div>
                                 </div>
 
-
-
-
                                 <div class="popup-wrap user type-header">
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -398,7 +395,7 @@
                                                 </span>
                                                 <span class="flex flex-column">
                                                     <span class="body-title mb-2">{{ Auth::user()->name }}</span>
-                                                    <span class="text-tiny">Admin</span>
+                                                    <span class="text-tiny">{{ Auth::user()->utype }}</span>
                                                 </span>
                                             </span>
                                         </button>
