@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+<style>
+  .filled-heart{
+      color: orange;
+  }
+</style>
 <main class="pt-90">
     <div class="mb-md-1 pb-md-3"></div>
     <section class="product-single container">
@@ -123,26 +128,39 @@
           @endif
 
           <div class="product-single__addtolinks">
-            <a href="#" class="menu-link menu-link_us-s add-to-wishlist"><svg width="16" height="16" viewBox="0 0 20 20"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <use href="#icon_heart" />
-              </svg><span>Add to Wishlist</span></a>
+            @if(Cart::instance('wishlist')->content()->where('id', $product->id)->count() > 0)
+            <form method="POST" action="{{ route('wishlist.item.remove', ['rowId'=>Cart::instance('wishlist')->content()->where('id', $product->id)->first()->rowId]) }}" id="frm-remove-item">
+              @csrf
+              @method('DELETE')
+              <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist filled-heart" onclick="getElementById('frm-remove-item').submit();">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_heart" /></svg>
+                <span>Remover da lista de desejos</span>
+              </a>
+            </form>
+            @else
+            <form method="POST" action="{{ route('wishlist.add') }}" id="wishlist-form">
+              @csrf
+              <input type="hidden" name="id" value="{{ $product->id }}" />
+              <input type="hidden" name="name" value="{{ $product->name }}" />
+              <input type="hidden" name="price" value="{{ $product->sale_price == '' ? $product->regular_price : $product->sale_price }}" />
+              <input type="hidden" name="quantity" value="1" />
+              <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist" onclick="document.getElementById('wishlist-form').submit()"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_heart" /></svg>
+                <span>Adicionar a lista de desejos</span>
+              </a>
+            </form>
+            @endif
+
             <share-button class="share-button">
               <button class="menu-link menu-link_us-s to-share border-0 bg-transparent d-flex align-items-center">
-                <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <use href="#icon_sharing" />
-                </svg>
-                <span>Share</span>
+                <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_sharing" /></svg>
+                <span>Compartilhar</span>
               </button>
               <details id="Details-share-template__main" class="m-1 xl:m-1.5" hidden="">
                 <summary class="btn-solid m-1 xl:m-1.5 pt-3.5 pb-3 px-5">+</summary>
-                <div id="Article-share-template__main"
-                  class="share-button__fallback flex items-center absolute top-full left-0 w-full px-2 py-4 bg-container shadow-theme border-t z-10">
+                <div id="Article-share-template__main" class="share-button__fallback flex items-center absolute top-full left-0 w-full px-2 py-4 bg-container shadow-theme border-t z-10">
                   <div class="field grow mr-4">
                     <label class="field__label sr-only" for="url">Link</label>
-                    <input type="text" class="field__input w-full" id="url"
-                      value="https://uomo-crystal.myshopify.com/blogs/news/go-to-wellness-tips-for-mental-health"
-                      placeholder="Link" onclick="this.select();" readonly="">
+                    <input type="text" class="field__input w-full" id="url" value="https://uomo-crystal.myshopify.com/blogs/news/go-to-wellness-tips-for-mental-health" placeholder="Link" onclick="this.select();" readonly="">
                   </div>
                   <button class="share-button__copy no-js-hidden">
                     <svg class="icon icon-clipboard inline-block mr-1" width="11" height="13" fill="none"
@@ -419,17 +437,16 @@
                         <p class="pc__category">{{ $rproduct->category->name }}</p>
                         <h6 class="pc__title"><a href="{{ route('shop.product.show', ['product_slug' => $product->slug]) }}">{{ $rproduct->name }}</a></h6>
                         <div class="product-card__price d-flex">
-                            <span class="money price">
-                                @if($rproduct->sale_price)
-                                    <s>R${{ $rproduct->regular_price }}<space></s> R${{ $rproduct->sale_price }}
-                                @else
-                                    R${{ $rproduct->regular_price }}
-                                @endif
-                            </span></div>
+                          <span class="money price">
+                              @if($rproduct->sale_price)
+                                  <s>R${{ $rproduct->regular_price }}<space></s> R${{ $rproduct->sale_price }}
+                              @else
+                                  R${{ $rproduct->regular_price }}
+                              @endif
+                          </span>
+                        </div>
                         <button class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist" title="Add To Wishlist">
-                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_heart" />
-                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_heart" /></svg>
                         </button>
                     </div>
                 </div>
