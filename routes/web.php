@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
@@ -44,7 +45,7 @@ Route::middleware(['auth'])->group(function() {
 Route::middleware(['auth', AuthAdmin::class])->group(function() {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
-    //BRANDS
+    //MARCAS
     Route::get('/admin/brands', [BrandController::class, 'brands'])->name('admin.brands');
     Route::get('/admin/brand/create', [BrandController::class, 'brand_create'])->name('admin.brand.create');
     Route::post('/admin/brand/store', [BrandController::class, 'brand_store'])->name('admin.brand.store');
@@ -52,7 +53,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function() {
     Route::put('/admin/brand/update', [BrandController::class, 'brand_update'])->name('admin.brand.update');
     Route::delete('/admin/brand/{id}/delete', [BrandController::class, 'brand_delete'])->name('admin.brand.delete');
 
-    //CATEGORIES
+    //CATEGORIAS
     Route::get('/admin/categories', [CategoryController::class, 'categories'])->name('admin.categories');
     Route::get('/admin/category/create', [CategoryController::class, 'category_create'])->name('admin.category.create');
     Route::post('/admin/category/store', [CategoryController::class, 'category_store'])->name('admin.category.store');
@@ -60,13 +61,18 @@ Route::middleware(['auth', AuthAdmin::class])->group(function() {
     Route::put('/admin/category/update', [CategoryController::class, 'category_update'])->name('admin.category.update');
     Route::delete('/admin/category/{id}/delete', [CategoryController::class, 'category_delete'])->name('admin.category.delete');
 
-    //PRODUCTS
+    //PRODUTOS
     Route::get('/admin/products', [ProductController::class, 'products'])->name('admin.products');
     Route::get('/admin/product/create', [ProductController::class, 'product_create'])->name('admin.product.create');
     Route::post('/admin/product/store', [ProductController::class, 'product_store'])->name('admin.product.store');
     Route::get('/admin/product/edit/{id}', [ProductController::class, 'product_edit'])->name('admin.product.edit');
     Route::put('/admin/product/update', [ProductController::class, 'product_update'])->name('admin.product.update');
     Route::delete('/admin/product/{id}/delete', [ProductController::class, 'product_delete'])->name('admin.product.delete');
+
+    //CUPONS DE DESCONTO
+    Route::get('/admin/coupons', [CouponController::class, 'coupons'])->name('admin.coupons');
+    Route::get('/admin/coupon/create', [CouponController::class, 'coupon_create'])->name('admin.coupon.create');
+    Route::post('/admin/coupon/store', [CouponController::class, 'coupon_store'])->name('admin.coupon.store');
 });
 
 
