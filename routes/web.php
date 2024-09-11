@@ -30,6 +30,10 @@ Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'decrease_
 Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
 Route::delete('/cart/remove', [CartController::class, 'empty_cart'])->name('cart.empty');
 
+#APLICACAO DO CUPOM DE DESCONTO
+Route::post('/cart/apply-coupon', [CartController::class, 'apply_coupon_code'])->name('cart.coupon.apply');
+
+
 #LISTA DE DESEJOS/FAVORITOS
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->name('wishlist.add');
@@ -73,7 +77,11 @@ Route::middleware(['auth', AuthAdmin::class])->group(function() {
     Route::get('/admin/coupons', [CouponController::class, 'coupons'])->name('admin.coupons');
     Route::get('/admin/coupon/create', [CouponController::class, 'coupon_create'])->name('admin.coupon.create');
     Route::post('/admin/coupon/store', [CouponController::class, 'coupon_store'])->name('admin.coupon.store');
+    Route::get('/admin/coupon/edit/{id}', [CouponController::class, 'coupon_edit'])->name('admin.coupon.edit');
+    Route::put('/admin/coupon/update', [CouponController::class, 'coupon_update'])->name('admin.coupon.update');
+    Route::delete('/admin/coupon/{id}/delete', [CouponController::class, 'coupon_delete'])->name('admin.coupon.delete');
+  
 });
 
 
-#############   ----------- CONTINUA PRÓXIMO VIDEO __   ########################
+#############   ----------- CONTINUA PRÓXIMO VIDEO 33   ########################

@@ -1,5 +1,13 @@
 @extends('layouts.app')
 @section('content')
+<style>
+    .text-success{
+        color: #278c04 !important;
+    }
+    .text-danger{
+        color: red !important;
+    }
+</style>
 <main class="pt-90">
     <div class="mb-4 pb-4"></div>
     <section class="shop-checkout container">
@@ -99,21 +107,64 @@
                         </tbody>
                     </table>
                     <div class="cart-table-footer">
-                        <form action="#" class="position-relative bg-body">
-                            <input class="form-control" type="text" name="coupon_code" placeholder="Código do cupom">
+
+                        <form action="{{ route('cart.coupon.apply') }}" method="POST" class="position-relative bg-body">
+                            @csrf
+                            <input class="form-control" type="text" name="coupon_code" placeholder="Código do cupom" value="@if(Session::has('coupon')) {{ Session::get('coupon')['code'] }} Validado! @endif">
                             <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="APLICAR CUPOM">
                         </form>
+
                         <form action="{{ route('cart.empty') }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-light">Limpar carrinho</button>
                         </form>
                     </div>
+                    <div>
+                        @if(Session::has('success'))
+                            <p class="text-success">{{ Session::get('success') }}</p>
+                        @elseif(Session::has('error'))
+                            <p class="text-danger">{{ Session::get('error') }}</p>
+                        @endif
+                    </div>
                 </div>
                 <div class="shopping-cart__totals-wrapper">
                     <div class="sticky-content">
                         <div class="shopping-cart__totals">
                             <h3>Valor total do carrinho</h3>
+                            @if (Session::has('discounts'))
+
+                            <table class="cart-totals">
+                                <tbody>
+                                    <tr>
+                                        <th>Subtotal</th>
+                                        <td>R${{ Cart::instance('cart')->subtotal() }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Desconto {{ Session::get('coupon')['code'] }}</th>
+                                        <td>R${{ Session::get('discounts')['discount'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Subtotal com desconto</th>
+                                        <td>R${{ Session::get('discounts')['subtotal'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Frete</th>
+                                        <td>Free</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Impostos</th>
+                                        <td>R${{ Session::get('discounts')['tax'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total</th>
+                                        <td>R${{ Session::get('discounts')['total'] }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            @else
+                            
                             <table class="cart-totals">
                                 <tbody>
                                     <tr>
@@ -134,6 +185,7 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            @endif
                         </div>
                         <div class="mobile_fixed-btn_wrapper">
                             <div class="button-wrapper container">
