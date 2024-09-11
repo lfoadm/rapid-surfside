@@ -107,12 +107,20 @@
                         </tbody>
                     </table>
                     <div class="cart-table-footer">
-
-                        <form action="{{ route('cart.coupon.apply') }}" method="POST" class="position-relative bg-body">
-                            @csrf
-                            <input class="form-control" type="text" name="coupon_code" placeholder="Código do cupom" value="@if(Session::has('coupon')) {{ Session::get('coupon')['code'] }} Validado! @endif">
-                            <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="APLICAR CUPOM">
-                        </form>
+                        @if(!Session::has('coupon'))
+                            <form action="{{ route('cart.coupon.apply') }}" method="POST" class="position-relative bg-body">
+                                @csrf
+                                <input class="form-control" type="text" name="coupon_code" placeholder="Código do cupom" value="">
+                                <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="APLICAR CUPOM">
+                            </form>
+                        @else
+                            <form action="{{ route('cart.coupon.remove') }}" method="POST" class="position-relative bg-body">
+                                @csrf
+                                @method('DELETE')
+                                <input class="form-control" type="text" name="coupon_code" placeholder="Código do cupom" value="@if(Session::has('coupon')) {{ Session::get('coupon')['code'] }} Validado! @endif">
+                                <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="REMOVER CUPOM">
+                            </form>
+                        @endif
 
                         <form action="{{ route('cart.empty') }}" method="post">
                             @csrf
@@ -189,7 +197,7 @@
                         </div>
                         <div class="mobile_fixed-btn_wrapper">
                             <div class="button-wrapper container">
-                                <a href="checkout.html" class="btn btn-primary btn-checkout">FAZER O PAGAMENTO</a>
+                                <a href="checkout.html" class="btn btn-primary btn-checkout">Continuar a compra</a>
                             </div>
                         </div>
                     </div>

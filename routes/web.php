@@ -32,6 +32,7 @@ Route::delete('/cart/remove', [CartController::class, 'empty_cart'])->name('cart
 
 #APLICACAO DO CUPOM DE DESCONTO
 Route::post('/cart/apply-coupon', [CartController::class, 'apply_coupon_code'])->name('cart.coupon.apply');
+Route::delete('/cart/remove-coupon', [CartController::class, 'remove_coupon_code'])->name('cart.coupon.remove');
 
 
 #LISTA DE DESEJOS/FAVORITOS

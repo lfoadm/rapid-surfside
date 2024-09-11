@@ -54,6 +54,7 @@ class CartController extends Controller
     public function apply_coupon_code(Request $request)
     {
         $coupon_code = $request->coupon_code;
+        
         if(isset($coupon_code))
         {
             $coupon = Coupon::where('code', $coupon_code)->where('expiry_date', '>=', Carbon::today())->where('cart_value', '<=', Cart::instance('cart')->subtotal())->first();
@@ -75,7 +76,7 @@ class CartController extends Controller
         }
         else
         {
-            return redirect()->back()->with('error', 'Cupon inválido!');
+            return redirect()->back()->with('error', 'Informe um cupon válido!');
         }
     }
 
@@ -90,7 +91,7 @@ class CartController extends Controller
             }
             else
             {
-                $discount = (Cart::instance('cart')->subtotal() * Session::get('coupon')['value'])/100;
+                $discount = (Cart::instance('cart')->subtotal()*Session::get('coupon')['value'])/100;
             }
 
             $subtotalAfterDiscount = Cart::instance('cart')->subtotal() - $discount;
@@ -107,5 +108,12 @@ class CartController extends Controller
 
             // dd(Session::get('discounts'));
         }
+    }
+
+    public function remove_coupon_code()
+    {
+        Session::forget('coupon');
+        Session::forget('discounts');
+        return back()->with('success', 'Cupom removido com sucesso!');
     }
 }
