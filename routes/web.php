@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Site\CartController;
+use App\Http\Controllers\Site\CheckoutController;
 use App\Http\Controllers\Site\ShopController;
 use App\Http\Controllers\Site\WishlistController;
 use App\Http\Controllers\UserController;
@@ -41,6 +42,9 @@ Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->na
 Route::delete('/wishlist/item/remove/{rowId}', [WishlistController::class, 'remove_item'])->name('wishlist.item.remove');
 Route::delete('/wishlist/clear', [WishlistController::class, 'empty_wishlist'])->name('wishlist.items.clear');
 Route::post('/wishlist/move-to-cart/{rowId}', [WishlistController::class, 'move_to_cart'])->name('wishlist.move.to.cart');
+
+#CHECKOUT
+Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('cart.checkout');
 
 #CONTA DO USUÁRIO FINAL (CONSUMIDOR)
 Route::middleware(['auth'])->group(function() {
