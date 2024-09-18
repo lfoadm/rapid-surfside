@@ -33,13 +33,13 @@
           <div class="billing-info__wrapper">
             <div class="row">
               <div class="col-6">
-                <h4>DETALHE DA COMPRA</h4>
+                <h4>DETALHES DA ENTREGA</h4>
               </div>
               <div class="col-6">
-                {{ $address }}
+                  
               </div>
             </div>
-
+            <hr>
             @if($address)
 
             <div class="row">
@@ -47,13 +47,12 @@
                     <div class="my-account__address-list">
                         <div class="my-account__address-list-item">
                             <div class="my-account__address-item-detail">
-                                <span>TESTE: </span><p>{{ $address->name }}</p>
-                                <span>TESTE: </span><p>{{ $address->address }}</p>
-                                <span>TESTE: </span><p>{{ $address->landmark }}</p>
-                                <span>TESTE: </span><p>{{ $address->city  }}, {{ $address->state  }}, {{ $address->country  }}</p>
-                                <span>TESTE: </span><p>{{ $address->zip }}</p>
-                                <br>
-                                <span>TESTE: </span><p>{{ $address->phone }}</p>
+                              <p><strong>Nome: </strong>{{ $address->name }}</p>
+                              <p><strong>Endereço: </strong>{{ $address->address }}</p>
+                              <p><strong>Cidade/Estado: </strong>{{ $address->city  }}, {{ $address->state  }}, {{ $address->country  }}</p>
+                              <p><strong>CEP: </strong>{{ $address->zip }}</p>
+                              <p><strong>Referência:</strong>{{ $address->landmark }}</p>
+                              <p><strong>Telefone de contato: </strong> {{ $address->phone }}</p>
                             </div>
                         </div>
                     </div>
