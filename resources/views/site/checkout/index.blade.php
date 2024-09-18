@@ -27,7 +27,8 @@
           </span>
         </a>
       </div>
-      <form name="checkout-form" action="#">
+      <form name="checkout-form" action="{{ route('cart.place.an.order') }}" method="POST">
+        @csrf
         <div class="checkout-form">
           <div class="billing-info__wrapper">
             <div class="row">
@@ -194,59 +195,31 @@
               </div>
               <div class="checkout__payment-methods">
                 <div class="form-check">
-                  <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                    id="checkout_payment_method_1" checked>
-                  <label class="form-check-label" for="checkout_payment_method_1">
-                    Direct bank transfer
-                    <p class="option-detail">
-                      Make your payment directly into our bank account. Please use your Order ID as the payment
-                      reference.Your order will not be shipped until the funds have cleared in our account.
-                    </p>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                    id="checkout_payment_method_2">
+                  <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode1" value="card">
                   <label class="form-check-label" for="checkout_payment_method_2">
-                    Check payments
-                    <p class="option-detail">
-                      Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                      aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                      magna posuere eget.
-                    </p>
+                    Cartão de crédito/débito
                   </label>
                 </div>
+
                 <div class="form-check">
-                  <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                    id="checkout_payment_method_3">
-                  <label class="form-check-label" for="checkout_payment_method_3">
-                    Cash on delivery
-                    <p class="option-detail">
-                      Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                      aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                      magna posuere eget.
-                    </p>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                    id="checkout_payment_method_4">
+                  <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode2" value="paypal">
                   <label class="form-check-label" for="checkout_payment_method_4">
                     Paypal
-                    <p class="option-detail">
-                      Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                      aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                      magna posuere eget.
-                    </p>
                   </label>
                 </div>
+
+                <div class="form-check">
+                  <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode3" value="cod">
+                  <label class="form-check-label" for="checkout_payment_method_3">
+                    Pagar na entrega
+                  </label>
+                </div>
+
                 <div class="policy-text">
-                  Your personal data will be used to process your order, support your experience throughout this
-                  website, and for other purposes described in our <a href="terms.html" target="_blank">privacy
-                    policy</a>.
+                  Seus dados pessoais serão usados ​​para processar seu pedido, dar suporte à sua experiência em todo este site e para outros fins descritos em nossa <a href="terms.html" target="_blank">política de privacidade</a>.
                 </div>
               </div>
-              <button class="btn btn-primary btn-checkout">PLACE ORDER</button>
+              <button class="btn btn-primary btn-checkout">Fazer o pedido</button>
             </div>
           </div>
         </div>

@@ -45,6 +45,8 @@ Route::post('/wishlist/move-to-cart/{rowId}', [WishlistController::class, 'move_
 
 #CHECKOUT
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('cart.checkout');
+Route::post('/place-an-order', [CheckoutController::class, 'place_an_order'])->name('cart.place.an.order');
+Route::get('/order-confirmation', [CheckoutController::class, 'order_confirmation'])->name('cart.order.confirmation');
 
 #CONTA DO USUÁRIO FINAL (CONSUMIDOR)
 Route::middleware(['auth'])->group(function() {
