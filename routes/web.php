@@ -52,6 +52,8 @@ Route::get('/order-confirmation', [CheckoutController::class, 'order_confirmatio
 #CONTA DO USUÁRIO FINAL (CONSUMIDOR)
 Route::middleware(['auth'])->group(function() {
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
+    Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
+    Route::get('/account-order/{order_id}/show', [UserController::class, 'order_show'])->name('user.order.show');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function() {
