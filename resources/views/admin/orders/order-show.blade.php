@@ -34,6 +34,9 @@
                 <a class="tf-button style-1 w208" href="{{ route('admin.orders') }}">Voltar</a>
             </div>
             <div class="table-responsive">
+                @if(Session::has('status'))
+                    <p class="alert alert-success">{{ Session::get('status') }}</p>
+                @endif
                 <table class="table table-striped table-bordered">
                     <tr>
                         <th>Nº do pedido</th>
@@ -173,6 +176,29 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="wg-box mt-5">
+            <h5>Atualizar status do pedido</h5>
+            <form action="{{ route('admin.order.status.update') }}" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="order_id" value="{{ $order->id }}" />
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="select">
+                            <select name="order_status" id="order_status">
+                                <option value="ordered" {{ $order->status == 'ordered' ? "selected" : "" }}>Pedido</option>
+                                <option value="delivered" {{ $order->status == 'delivered' ? "selected" : "" }}>Entregue</option>
+                                <option value="canceled" {{ $order->status == 'canceled' ? "selected" : "" }}>Cancelado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary tf-button w208" type="submit">Atualizar status</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

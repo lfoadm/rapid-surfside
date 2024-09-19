@@ -119,7 +119,10 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered">
+                        @if(Session::has('status'))
+                            <p class="alert alert-success">{{ Session::get('status') }}</p>
+                        @endif
+                        <table class="table table-bordered table-striped table-transaction">
                             <tr>
                                 <th>Nº do pedido</th>
                                 <td>{{ $order->id }}</td>
@@ -261,9 +264,41 @@
                         </table>
                     </div>
                 </div>
+                @if($order->status == 'ordered')
+                <div class="wg-box mt-5 text-right">
+                    <form action="{{ route('user.order.cancel') }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="order_id" value="{{ $order->id }}" />
+                        <button type="button" class="btn btn-danger cancel-order">Cancelar pedido</button>
+                    </form>
+                </div>
+                @endif
             </div>
 
         </div>
     </section>
 </main>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function(){
+            $('.cancel-order').on('click', function(e){
+                e.preventDefault();
+                var form = $(this).closest('form');
+                swal({
+                    title: "Tem certeza?",
+                    text: "Você quer cancelar este pedido?",
+                    type: "warning",
+                    buttons: ["Não", "Sim"],
+                    confirmButtonColor: '#dc3545'
+                }).then(function(result){
+                    if(result){
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

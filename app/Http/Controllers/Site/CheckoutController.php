@@ -89,12 +89,12 @@ class CheckoutController extends Controller
 
         if($request->mode == "card")
         {
-            //
+            dd("card");
         }
 
         elseif($request->mode == "paypal")
         {
-            //
+            dd("paypal");
         }
         elseif($request->mode == "cod")
         {
