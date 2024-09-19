@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Site\CartController;
@@ -96,6 +97,14 @@ Route::middleware(['auth', AuthAdmin::class])->group(function() {
     Route::get('/admin/orders', [OrderController::class, 'orders'])->name('admin.orders');
     Route::get('/admin/order/{order_id}/show', [OrderController::class, 'order_show'])->name('admin.order.show');
     Route::put('/admin/order/update-status', [OrderController::class, 'update_order_status'])->name('admin.order.status.update');
+
+    //PEDIDOS (ORDERS)
+    Route::get('/admin/slides', [SlideController::class, 'slides'])->name('admin.slides');
+    Route::get('/admin/slide/create', [SlideController::class, 'slide_create'])->name('admin.slide.create');
+    Route::post('/admin/slide/store', [SlideController::class, 'slide_store'])->name('admin.slide.store');
+    Route::get('/admin/slide/edit/{id}', [SlideController::class, 'slide_edit'])->name('admin.slide.edit');
+    Route::put('/admin/slide/update', [SlideController::class, 'slide_update'])->name('admin.slide.update');
+    Route::delete('/admin/slide/{id}/delete', [SlideController::class, 'slide_delete'])->name('admin.slide.delete');
 });
 
 
