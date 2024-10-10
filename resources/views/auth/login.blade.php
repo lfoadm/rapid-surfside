@@ -19,31 +19,23 @@
                         @csrf
                         <div class="form-floating mb-3">
                             <input class="form-control form-control_gray @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required="" autocomplete="email" autofocus="">
-                            <label for="email">Email address *</label>
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                            <label for="email">E-mail *</label>
+                            @error('email')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
                         </div>
 
                         <div class="pb-3"></div>
 
                         <div class="form-floating mb-3">
                             <input id="password" type="password" class="form-control form-control_gray @error('password') is-invalid @enderror" name="password" required="" autocomplete="current-password">
-                            <label for="customerPasswodInput">Password *</label>
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                            <label for="customerPasswodInput">Senha *</label>
+                            @error('password')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
                         </div>
 
-                        <button class="btn btn-primary w-100 text-uppercase" type="submit">Log In</button>
+                        <button class="btn btn-primary w-100 text-uppercase" type="submit">Entrar</button>
 
                         <div class="customer-option mt-4 text-center">
-                            <span class="text-secondary">No account yet?</span>
-                            <a href="{{ route('register') }}" class="btn-text js-show-register">Create Account</a>
+                            <span class="text-secondary">Não tem conta?</span>
+                            <a href="{{ route('register') }}" class="btn-text js-show-register">Criar conta</a>
                         </div>
                     </form>
                 </div>
