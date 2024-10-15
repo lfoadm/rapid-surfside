@@ -45,10 +45,10 @@ class AdminController extends Controller
         $DeliveredAmountM = implode(',', collect($monthlyDatas)->pluck('TotalDeliveredAmount')->toArray());
         $CanceledAmountM = implode(',', collect($monthlyDatas)->pluck('TotalCanceledAmount')->toArray());
 
-        $TotalAmount = collect($monthlyDatas)->sum('TotalAmount');
-        $TotalOrderedAmount = collect($monthlyDatas)->sum('TotalOrderedAmount');
-        $TotalDeliveredAmount = collect($monthlyDatas)->sum('TotalDeliveredAmount');
-        $TotalCanceledAmount = collect($monthlyDatas)->sum('TotalCanceledAmount');
+        $TotalAmount = number_format(floatval(collect($monthlyDatas)->sum('TotalAmount')),2,',','.');
+        $TotalOrderedAmount = number_format(floatval(collect($monthlyDatas)->sum('TotalOrderedAmount')),2,',','.');
+        $TotalDeliveredAmount = number_format(floatval(collect($monthlyDatas)->sum('TotalDeliveredAmount')),2,',','.');
+        $TotalCanceledAmount = number_format(floatval(collect($monthlyDatas)->sum('TotalCanceledAmount')),2,',','.');
 
         return view('admin.index', compact(
             'orders',

@@ -28,7 +28,7 @@
                             </div>
                             <div>
                                 <div class="body-text mb-2">Valor total</div>
-                                <h4>{{ $dashboardDatas[0]->TotalAmount }}</h4>
+                                <h4>{{ number_format($dashboardDatas[0]->TotalAmount, 2, ',', '.') }}</h4>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                             </div>
                             <div>
                                 <div class="body-text mb-2">Valor dos pedidos pendentes</div>
-                                <h4>{{ $dashboardDatas[0]->TotalOrderedAmount }}</h4>
+                                <h4>{{ number_format($dashboardDatas[0]->TotalOrderedAmount, 2, ',', '.') }}</h4>
                             </div>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                             </div>
                             <div>
                                 <div class="body-text mb-2">Valor dos pedidos entregues</div>
-                                <h4>{{ $dashboardDatas[0]->TotalDeliveredAmount }}</h4>
+                                <h4>{{ number_format($dashboardDatas[0]->TotalDeliveredAmount, 2, ',', '.') }}</h4>
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                             </div>
                             <div>
                                 <div class="body-text mb-2">Valor dos pedidos cancelados</div>
-                                <h4>{{ $dashboardDatas[0]->TotalCanceledAmount }}</h4>
+                                <h4>{{ number_format($dashboardDatas[0]->TotalCanceledAmount, 2, ',', '.') }}</h4>
                             </div>
                         </div>
                     </div>
@@ -220,9 +220,9 @@
                                 <td class="text-center">{{ $order->id }}</td>
                                 <td class="text-center">{{ $order->name }}</td>
                                 <td class="text-center">{{ $order->phone }}</td>
-                                <td class="text-center">R$ {{ $order->subtotal }}</td>
-                                <td class="text-center">R$ {{ $order->tax }}</td>
-                                <td class="text-center">R$ {{ $order->total }}</td>
+                                <td class="text-center">R$ {{ number_format(floatval($order->subtotal),2,',','.') }}</td>
+                                <td class="text-center">R$ {{ number_format(floatval($order->tax),2,',','.') }}</td>
+                                <td class="text-center">R$ {{ number_format(floatval($order->total),2,',','.') }}</td>
                                 <td class="text-center">
                                     @if($order->status == 'delivered')
                                         <span class="badge bg-success">Entregue</span>
@@ -232,9 +232,9 @@
                                         <span class="badge bg-warning">Pedido</span>
                                     @endif
                                 </td>
-                                <td class="text-center">{{ $order->created_at }}</td>
+                                <td class="text-center">{{ $order->created_at->format('d/m/Y H:i') }}</td>
                                 <td class="text-center">{{ $order->orderItems->count() }}</td>
-                                <td class="text-center">{{ $order->delivered_date }}</td>
+                                <td class="text-center">{{ $order->delivered_date ? \Carbon\Carbon::parse($order->delivered_date)->format('d/m/Y H:i') : '-' }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('admin.order.show', ['order_id' => $order->id]) }}">
                                         <div class="list-icon-function view-icon">

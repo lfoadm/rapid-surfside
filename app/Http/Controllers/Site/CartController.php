@@ -99,11 +99,11 @@ class CartController extends Controller
             $totalAfterDiscount = $subtotalAfterDiscount + $taxaAfterDiscoutn;
 
             Session::put('discounts', [
-                'subtotal' => number_format(floatval($subtotalAfterDiscount),2,'.',''),
-                'discount' => number_format(floatval($discount),2,'.',''),
-                'tax' => number_format(floatval($taxaAfterDiscoutn),2,'.',''),
-                'total' => number_format(floatval($totalAfterDiscount),2,'.',''),
-                'buceta' => number_format(floatval(100),2,'.',''),
+                'subtotal' => number_format(floatval($subtotalAfterDiscount),2,',','.'),
+                'discount' => number_format(floatval($discount),2,',','.'),
+                'tax' => number_format(floatval($taxaAfterDiscoutn),2,',','.'),
+                'total' => number_format(floatval($totalAfterDiscount),2,',','.'),
+                'buceta' => number_format(floatval(100),2,',','.'),
             ]);
 
             // dd(Session::get('discounts'));
