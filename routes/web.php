@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
@@ -49,6 +50,10 @@ Route::post('/wishlist/move-to-cart/{rowId}', [WishlistController::class, 'move_
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('cart.checkout');
 Route::post('/place-an-order', [CheckoutController::class, 'place_an_order'])->name('cart.place.an.order');
 Route::get('/order-confirmation', [CheckoutController::class, 'order_confirmation'])->name('cart.order.confirmation');
+
+#CONTACTS
+Route::get('/contact-us', [ContactController::class, 'index'])->name('home.contact');
+Route::post('/contact/store', [ContactController::class, 'store'])->name('home.contact.store');
 
 #CONTA DO USUÁRIO FINAL (CONSUMIDOR)
 Route::middleware(['auth'])->group(function() {
@@ -105,6 +110,10 @@ Route::middleware(['auth', AuthAdmin::class])->group(function() {
     Route::get('/admin/slide/edit/{id}', [SlideController::class, 'slide_edit'])->name('admin.slide.edit');
     Route::put('/admin/slide/update', [SlideController::class, 'slide_update'])->name('admin.slide.update');
     Route::delete('/admin/slide/{id}/delete', [SlideController::class, 'slide_delete'])->name('admin.slide.delete');
+
+    //CONTATOS (CONTACTS ADMIN)
+    Route::get('/admin/contacts', [ContactController::class, 'contacts'])->name('admin.contacts');
+    Route::delete('/admin/contacts/{id}', [ContactController::class, 'destroy'])->name('admin.contacts.destroy');
 });
 
 

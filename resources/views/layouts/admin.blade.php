@@ -151,6 +151,13 @@
                                 </li>
 
                                 <li class="menu-item">
+                                    <a href="{{ route('admin.contacts') }}" class="">
+                                        <div class="icon"><i class="icon-mail"></i></div>
+                                        <div class="text">Contatos</div>
+                                    </a>
+                                </li>
+
+                                <li class="menu-item">
                                     <a href="settings.html" class="">
                                         <div class="icon"><i class="icon-settings"></i></div>
                                         <div class="text">Configurações</div>
