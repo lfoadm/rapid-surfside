@@ -55,6 +55,9 @@ Route::get('/order-confirmation', [CheckoutController::class, 'order_confirmatio
 Route::get('/contact-us', [ContactController::class, 'index'])->name('home.contact');
 Route::post('/contact/store', [ContactController::class, 'store'])->name('home.contact.store');
 
+#SEARCH
+Route::get('/search', [HomeController::class, 'search'])->name('home.search');
+
 #CONTA DO USUÁRIO FINAL (CONSUMIDOR)
 Route::middleware(['auth'])->group(function() {
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');

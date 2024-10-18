@@ -17,4 +17,11 @@ class HomeController extends Controller
         $fproducts = Product::where('featured', 1)->get()->take(6);
         return view('index', compact('slides', 'categories', 'sproducts', 'fproducts'));
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $results = Product::where('name', 'LIKE', "%{$query}%")->get()->take(8);
+        return response()->json($results);
+    }
 }
